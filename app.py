@@ -8,12 +8,12 @@ st.write("Bem-vindo ao seu app de **Vibe Coding**! Faça cálculos rápidos de f
 
 st.markdown("---")
 
-# Dois campos de entrada numérica sem formatação fixa de decimais
+# Dois campos de entrada numérica configurados como inteiros (value=0 e step=1)
 col1, col2 = st.columns(2)
 with col1:
-    num1 = st.number_input("Digite o primeiro número:", value=0.0)
+    num1 = st.number_input("Digite o primeiro número:", value=0, step=1)
 with col2:
-    num2 = st.number_input("Digite o segundo número:", value=0.0)
+    num2 = st.number_input("Digite o segundo número:", value=0, step=1)
 
 # Componente de seleção para escolher a operação
 operacao = st.selectbox(
@@ -45,7 +45,7 @@ if st.button("Calcular", type="primary", use_container_width=True):
     # Se não houver erro, exibe o resultado de forma inteligente
     if not erro:
         # Se o resultado for inteiro (ex: 4.0), removemos o .0 para ficar limpo
-        if resultado.is_integer():
+        if isinstance(resultado, float) and resultado.is_integer():
             resultado_final = int(resultado)
         else:
             resultado_final = round(resultado, 4)
@@ -55,4 +55,4 @@ if st.button("Calcular", type="primary", use_container_width=True):
 
 # Rodapé simples
 st.markdown("---")
-st.caption("💡 Dica: Agora o app se adapta automaticamente, exibindo números inteiros sem decimais desnecessários.")
+st.caption("💡 Dica: Agora os números digitados entram limpos, e o resultado se adapta de forma inteligente.")
